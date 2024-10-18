@@ -1,83 +1,57 @@
 <template>
-  <div id="app" class="min-h-screen bg-gradient-to-r from-green-400 to-blue-600 flex items-center justify-center p-4">
-    <div v-if="!isLoggedIn" class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md text-center">
-      <h1 class="text-2xl font-bold text-gray-800 mb-2" dir="rtl">در حال بارگذاری...</h1>
-      <h1 class="text-1xl font-bold text-gray-800 mb-10" dir="rtl">لطفاً شکیبا باشید! 🙏</h1>
+  
+  <div class="flex flex-col min-h-screen">
+    <!-- نمایش لودینگ در هنگام بارگذاری -->
+    <div v-if="isLoading" class="min-h-screen bg-gradient-to-r from-green-400 to-blue-600 flex items-center justify-center p-4">
+      <div  class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md mx-auto my-auto text-center">
+        <h1 class="text-2xl font-bold text-gray-800 mb-2" dir="rtl">در حال دریافت داده‌ها،</h1>
+        <h1 class="text-1xl font-bold text-gray-800 mb-10" dir="rtl">لطفاً شکیبا باشید!🙏</h1>
 
-      <div class="text-center">
-        <div role="status">
-          <svg aria-hidden="true" class="inline w-8 h-8 text-gray-200 animate-spin dark:text-blue-600 fill-blue-600"
-               viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908Z" fill="currentColor" />
-            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227..." fill="currentFill" />
-          </svg>
+        <div class="text-center">
+          <div role="status">
+            <svg
+              aria-hidden="true"
+              class="inline w-8 h-8 text-gray-200 animate-spin dark:text-blue-600 fill-blue-600"
+              viewBox="0 0 100 101"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                fill="currentColor" />
+              <path
+                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                fill="currentFill" />
+            </svg>
+            <span class="sr-only">Loading...</span>
+          </div>
         </div>
       </div>
     </div>
 
-    <div v-else class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md text-center">
-      <h2 class="text-2xl font-bold text-gray-800 mb-4">مدیریت هزینه‌ها</h2>
+    <!-- محتوای اصلی بعد از بارگذاری -->
+    <div v-else class="flex flex-col min-h-screen">
+      <router-view class="flex-grow"></router-view>
 
-      <form @submit.prevent="setIncome" class="mb-4 space-y-4" dir="rtl">
-        <input
-          v-model.number="income"
-          type="number"
-          placeholder="مبلغ حقوق ماهانه..."
-          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-        <button
-          type="submit"
-          class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors">
-          ثبت حقوق
-        </button>
-      </form>
+      <!-- ناوبری در پایین صفحه -->
+      <nav class="fixed bottom-0 left-0 w-full bg-gray-800 text-white flex justify-around py-3">
+        <router-link
+          to="/"
+          class="flex flex-col items-center text-center text-sm"
+          active-class="text-green-400"
+        >
+          <i class="fas fa-wallet text-xl"></i>
+          <span>هزینه‌ها</span>
+        </router-link>
 
-      <p class="mb-4" dir="rtl">حقوق ماهانه: {{ income }} تومان</p>
-      <p class="mb-4" dir="rtl">مجموع هزینه‌ها: {{ totalExpenses }} تومان</p>
-      <p class="mb-4" dir="rtl">باقی‌مانده: {{ remainingAmount }} تومان</p>
-
-      <form @submit.prevent="addExpense" class="mb-4 space-y-4" dir="rtl">
-        <input
-          v-model="newExpenseTitle"
-          placeholder="عنوان هزینه..."
-          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-        <input
-          v-model.number="newExpenseAmount"
-          type="number"
-          placeholder="مبلغ هزینه..."
-          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-        <button
-          type="submit"
-          class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors">
-          اضافه کردن هزینه
-        </button>
-      </form>
-
-      <div v-if="expenses.length === 0" class="text-center">
-        <p dir="rtl">هیچ هزینه‌ای ثبت نشده است.</p>
-      </div>
-
-      <div v-else class="overflow-y-auto max-h-40">
-        <ul class="space-y-2" dir="rtl">
-          <li
-            v-for="expense in expenses"
-            :key="expense.id"
-            class="flex justify-between items-center bg-gray-100 p-2 rounded-lg">
-            <span>{{ expense.title }} - {{ expense.amount }} تومان</span>
-            <div class="flex space-x-2">
-              <button
-                @click="togglePaid(expense)"
-                class="bg-green-500 hover:bg-green-600 text-white py-1 px-2 rounded-lg ml-2">
-                {{ expense.isPaid ? 'واگرد پرداخت' : 'پرداخت شد' }}
-              </button>
-              <button
-                @click="deleteExpense(expense.id)"
-                class="bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded-lg">
-                حذف
-              </button>
-            </div>
-          </li>
-        </ul>
-      </div>
+        <router-link
+          to="/income"
+          class="flex flex-col items-center text-center text-sm"
+          active-class="text-green-400"
+        >
+          <i class="fas fa-money-bill-wave text-xl"></i>
+          <span>حقوق و مانده</span>
+        </router-link>
+      </nav>
     </div>
   </div>
 </template>
@@ -86,76 +60,21 @@
 export default {
   data() {
     return {
-      isLoggedIn: false,
-      income: 0,
-      newExpenseTitle: '',
-      newExpenseAmount: 0,
-      expenses: [],
+      isLoading: true, // حالت بارگذاری اولیه
     };
   },
-  computed: {
-    totalExpenses() {
-      return this.expenses.reduce((sum, expense) => sum + expense.amount, 0);
-    },
-    remainingAmount() {
-      return this.income - this.totalExpenses;
-    },
-  },
-  methods: {
-    setIncome() {
-      if (this.income > 0) {
-        this.saveData();
-        alert("حقوق ثبت شد!");
-      }
-    },
-    addExpense() {
-      if (this.newExpenseTitle && this.newExpenseAmount > 0) {
-        this.expenses.push({
-          id: Date.now(),
-          title: this.newExpenseTitle,
-          amount: this.newExpenseAmount,
-          isPaid: false,
-        });
-        this.newExpenseTitle = '';
-        this.newExpenseAmount = 0;
-        this.saveData();
-      }
-    },
-    togglePaid(expense) {
-      expense.isPaid = !expense.isPaid;
-      this.saveData();
-    },
-    deleteExpense(id) {
-      this.expenses = this.expenses.filter(expense => expense.id !== id);
-      this.saveData();
-    },
-    saveData() {
-      const data = {
-        income: this.income,
-        expenses: this.expenses,
-      };
-      localStorage.setItem('expenseManagerData', JSON.stringify(data));
-    },
-    loadData() {
-      const storedData = localStorage.getItem('expenseManagerData');
-      if (storedData) {
-        const { income, expenses } = JSON.parse(storedData);
-        this.income = income;
-        this.expenses = expenses;
-      }
-    },
-  },
   mounted() {
+    // تاخیر 4 ثانیه‌ای برای نمایش لودینگ
     setTimeout(() => {
-      this.isLoggedIn = true;
-      this.loadData();
-    }, 2000);
+      this.isLoading = false;
+    }, 4000);
   },
 };
 </script>
 
-<style>
-.line-through {
-  text-decoration: line-through;
+<style scoped>
+/* اعمال افکت برای آیکون فعال */
+nav a.router-link-active {
+  color: #34d399; /* سبز روشن */
 }
 </style>
