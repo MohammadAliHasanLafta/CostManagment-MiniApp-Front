@@ -2,7 +2,7 @@
   <div class="bg-[#ffffffb7] p-8 rounded-xl shadow-lg w-full max-w-md text-center">
     <h2 class="text-2xl font-bold text-gray-800 mb-4">مدیریت هزینه‌ها</h2>
 
-    <form @submit.prevent="handleSubmit" class="mb-4 space-y-4" dir="rtl">
+    <!-- <form @submit.prevent="handleSubmit" class="mb-4 space-y-4" dir="rtl">
       <input
         v-model="newExpenseTitle"
         placeholder="عنوان هزینه..."
@@ -17,7 +17,7 @@
         class="w-full bg-[#FF8100] hover:bg-[#FFA242] text-white font-semibold py-2 px-4 rounded-lg transition-colors">
         اضافه کردن هزینه
       </button>
-    </form>
+    </form> -->
 
     <p class="mb-4" dir="rtl">مجموع هزینه‌ها: {{ totalExpenses }} تومان</p>
 
@@ -89,7 +89,7 @@
 <script>
 import axios from 'axios';
 export default {
-  props: ['userId', 'phoneNumber'],
+  props: ['userId', 'phoneNumber', 'expenses'],
   data() {
     return {
       newExpenseTitle: '',
@@ -175,7 +175,7 @@ export default {
     saveData() {
       localStorage.setItem('expenses', JSON.stringify(this.expenses));
     },
-    async loadData() {
+    async loadData(expenses) {
       try {
         let response = null;
         if (this.userId) {
@@ -191,14 +191,24 @@ export default {
         } else {
           throw new Error('User ID یا شماره تلفن موجود نیست.');
         }
-        this.expenses = response.data;
+        expenses = response.data;
       } catch (error) {
         console.error('مشکل در دریافت هزینه ها :', error);
       }
+      this.expenses = expenses;
     },
   },
-  mounted() {
+  mounted(){
     this.loadData();
+  },
+  watch: {
+    expenses: {
+      handler(newExpense) {
+        this.loadData(newExpense);
+      },
+      immediate: true,
+      deep: true
+    }
   },
 };
 </script>
