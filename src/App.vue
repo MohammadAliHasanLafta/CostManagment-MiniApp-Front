@@ -158,6 +158,23 @@
   </div>
 </div>
 
+<div v-if="settingshow" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+    <h2 class="text-2xl font-semibold mb-4" dir="rtl">تنظیمات</h2>
+    <div class="mb-4">
+      <label class="block text-gray-600 font-semibold pb-2" dir="rtl">تغییر حالت نمایش</label>
+      <select v-model="theme" @change="applyTheme" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F37F00]">
+        <option value="light">حالت روشن</option>
+        <option value="dark">حالت تاریک</option>
+      </select>
+    </div>
+    <div class="flex justify-end space-x-4">
+      <button @click="closeSettings" class="bg-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400" dir="rtl">بستن</button>
+    </div>
+  </div>
+</div>
+
+
   </div>
 </template>
 
@@ -188,6 +205,8 @@ export default {
       log: null,
       isDrawerOpen: false,
       isAnimating: false,
+      settingshow: false,
+      theme: 'light',
     };
   },
   async mounted() {
@@ -214,17 +233,35 @@ export default {
 
       window.Eitaa.WebApp.SettingsButton.show();
       window.Eitaa.WebApp.SettingsButton.onClick(() =>{
-        this.$router.push({
-          path: '/',
-        });
+        this.openSettings()
+        this.settingshow = true;
       });
     } else {
       this.showOtp = true;  
     }
 
     this.checkAndRequestContact();
+    this.applyTheme(); 
+  },
+  created() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      this.theme = savedTheme;
+    }
   },
   methods: {
+    openSettings() {
+      this.settingshow = true;
+    },
+    closeSettings() {
+      this.settingshow = false;
+    },
+    applyTheme() {
+      const themeClass = this.theme === 'dark' ? 'dark-mode' : 'light-mode';
+      document.documentElement.classList.remove('light-mode', 'dark-mode');
+      document.documentElement.classList.add(themeClass);
+      localStorage.setItem('theme', this.theme); // Save the theme to local storage
+    },
     async sendMessengerPhone(contact) {
       try {
         console.log("reponse : "+contact.response);
@@ -525,6 +562,32 @@ export default {
 
 .line-through {
   text-decoration: line-through;
+}
+.light-mode {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --navbar-color: #FF8100;
+  --navbar-hover-color: #FFA242;
+}
+
+.dark-mode {
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  --navbar-color: #333333;
+  --navbar-hover-color: #555555;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+nav {
+  background-color: var(--navbar-color);
+}
+
+nav a:hover {
+  background-color: var(--navbar-hover-color);
 }
 .background-container {
   width: 100vw;
