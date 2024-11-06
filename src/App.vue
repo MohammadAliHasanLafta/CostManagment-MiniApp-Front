@@ -164,8 +164,8 @@
     <div class="mb-4">
       <label class="block text-gray-600 font-semibold pb-2" dir="rtl">تغییر حالت نمایش</label>
       <select v-model="theme" @change="applyTheme" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F37F00]">
-        <option @click="closeSettings" value="light">حالت روشن</option>
-        <option @click="closeSettings" value="dark">حالت تاریک</option>
+        <option value="light">حالت روشن</option>
+        <option value="dark">حالت تاریک</option>
       </select>
     </div>
   </div>
@@ -259,6 +259,7 @@ export default {
       document.documentElement.classList.remove('light-mode', 'dark-mode');
       document.documentElement.classList.add(themeClass);
       localStorage.setItem('theme', this.theme); // ذخیره حالت در لوکال استوریج
+      this.closeSettings();
     },
     toggleTheme() {
       this.theme = this.theme === 'light' ? 'dark' : 'light';
