@@ -211,6 +211,12 @@ export default {
           path: '/',
         });
       });
+
+      window.Eitaa.WebApp.SettingsButton.onClick(() =>{
+        this.$router.push({
+          path: '/',
+        });
+      });
     } else {
       this.showOtp = true;  
     }
