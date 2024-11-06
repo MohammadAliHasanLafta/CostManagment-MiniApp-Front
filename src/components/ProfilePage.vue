@@ -1,5 +1,5 @@
 <template >
-    <div @click.self="closeMenu" class="h-screen w-screen flex justify-center items-center bg-[#ffffff9f]">
+    <div @click.self="closeMenu" class="h-screen w-screen flex justify-center items-center bg-[#ffffff00]">
       <div class="p-6 max-w-md mx-4">
         <div class="text-center mb-6">
           <h2 class="font-semibold text-2xl text-gray-800 mt-2"></h2>

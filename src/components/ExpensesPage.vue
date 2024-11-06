@@ -1,5 +1,5 @@
 <template>
-  <div @click.self="closeMenu" class="h-screen w-screen flex justify-center items-start bg-[#ffffff9f]">
+  <div @click.self="closeMenu" class="h-screen w-screen flex justify-center items-start bg-[#ffffff00]">
       <div class="p-6 w-full max-w-xs mx-auto mt-4 text-center">
         <h2 class="text-2xl font-bold text-gray-800 mb-4">مدیریت هزینه‌ها</h2>
         
