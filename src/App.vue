@@ -212,6 +212,7 @@ export default {
         });
       });
 
+      window.Eitaa.WebApp.MainButton.show();
       window.Eitaa.WebApp.SettingsButton.onClick(() =>{
         this.$router.push({
           path: '/',
