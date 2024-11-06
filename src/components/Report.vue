@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen w-screen flex justify-center items-center bg-[#ffffff00]">
+  <div class="h-screen w-screen flex justify-center items-center bg-[#ffffff25]">
     <div class="p-6 w-full max-w-xs mx-auto mt-4 text-center report-container" dir="rtl">
       <h2 class="text-2xl font-bold text-gray-800 mb-4">گزارش هزینه‌ها</h2>
 
