@@ -555,8 +555,6 @@ export default {
 .light-mode {
   --background-color: #ffffff;
   --text-color: #333333;
-  --button-background: #FF8100;
-  --button-hover: #FFA242;
   --navbar-background: #ffffff;
   --navbar-text: #333333;
   --icon-color: #FF8100;
@@ -565,8 +563,6 @@ export default {
 .dark-mode {
   --background-color: #2c2c2c;
   --text-color: #f1f1f1;
-  --button-background: #333333;
-  --button-hover: #444444;
   --navbar-background: #3c3c3c;
   --navbar-text: #f1f1f1;
   --icon-color: #FFAB49;
