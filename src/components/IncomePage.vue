@@ -1,5 +1,6 @@
 <template>
-  <div class="bg-[#ffffffb7] p-8 rounded-xl shadow-lg w-full max-w-md text-center">
+  <div class="h-screen w-screen flex justify-center items-center bg-[#ffffff9f]">
+    <div class="p-6 w-full max-w-xs mx-auto mt-4 text-center">
     <h2 class="text-2xl font-bold text-gray-800 mb-4">مدیریت حقوق و مانده</h2>
 
     <form @submit.prevent="setIncome" class="mb-4 space-y-4" dir="rtl">
@@ -19,18 +20,28 @@
     <p class="mb-4" dir="rtl">مجموع هزینه‌ها: {{ totalExpenses }} تومان</p>
     <p class="mb-4" dir="rtl">باقی‌مانده: {{ remainingAmount }} تومان</p>
   </div>
+</div>
 </template>
 
 <script>
 import axios from 'axios';
 
 export default {
-  props: ['userId', 'phoneNumber'],
+  props: ['userId', 'phoneNumber', 'expenses'],
   data() {
     return {
       income: 0,
       expenses: [],
     };
+  },
+  watch: {
+    expenses: {
+      handler(expenses) {
+        this.loadExpenses(expenses);
+      },
+      immediate: true,
+      deep: true
+    }
   },
   computed: {
     totalExpenses() {
@@ -62,7 +73,7 @@ export default {
         console.error('مشکل در دریافت هزینه ها :', error);
       }
     },
-    async loadExpenses() {
+    async loadExpenses(expenses) {
       try {
         let response = null;
         if (this.userId) {
@@ -78,10 +89,11 @@ export default {
         } else {
           throw new Error('User ID یا شماره تلفن موجود نیست.');
         }
-        this.expenses = response.data;
+        expenses = response.data;
       } catch (error) {
         console.error('مشکل در دریافت هزینه ها :', error);
       }
+      this.expenses = expenses;
     },
     async setIncome() {
       const newIncomeData = {
@@ -102,9 +114,9 @@ export default {
       }
     },
   },
-  async mounted() {
-    await this.loadIncome(); 
-    await this.loadExpenses(); 
+  mounted() {
+    this.loadIncome(); 
+    this.loadExpenses(); 
   },
 };
 </script>
