@@ -563,32 +563,7 @@ export default {
 .line-through {
   text-decoration: line-through;
 }
-.light-mode {
-  --bg-color: #ffffff;
-  --text-color: #000000;
-  --navbar-color: #FF8100;
-  --navbar-hover-color: #FFA242;
-}
 
-.dark-mode {
-  --bg-color: #121212;
-  --text-color: #ffffff;
-  --navbar-color: #333333;
-  --navbar-hover-color: #555555;
-}
-
-body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-}
-
-nav {
-  background-color: var(--navbar-color);
-}
-
-nav a:hover {
-  background-color: var(--navbar-hover-color);
-}
 .background-container {
   width: 100vw;
   height: 100vh;
@@ -635,6 +610,86 @@ nav a:hover {
 
 .drawer.slide-down {
   animation: slideDown 0.5s ease-out forwards;
+}
+
+/* حالت روشن (پیش‌فرض) */
+.light-mode {
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --button-background: #FF8100;
+  --button-hover: #FFA242;
+  --input-background: #ffffff;
+  --input-border: #e5e5e5;
+  --input-text: #333333;
+}
+
+/* حالت تاریک */
+.dark-mode {
+  --background-color: #2c2c2c;
+  --text-color: #f1f1f1;
+  --button-background: #333333;
+  --button-hover: #444444;
+  --input-background: #444444;
+  --input-border: #666666;
+  --input-text: #ffffff;
+}
+
+/* تنظیمات عمومی */
+body.light-mode,
+body.dark-mode {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* استایل بخش اصلی برنامه */
+.background-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+  background-blend-mode: multiply;
+}
+
+/* استایل های کارت ها */
+.background-container .bg-white,
+.background-container .shadow-lg {
+  background-color: var(--input-background);
+  color: var(--text-color);
+  border-color: var(--input-border);
+}
+
+input,
+select {
+  background-color: var(--input-background);
+  border-color: var(--input-border);
+  color: var(--input-text);
+}
+
+/* استایل دکمه‌ها */
+button {
+  background-color: var(--button-background);
+  color: var(--text-color);
+}
+
+button:hover {
+  background-color: var(--button-hover);
+}
+
+.navbar {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border-top: 1px solid var(--input-border);
+}
+
+/* استایل های مخصوص پاپ‌آپ تنظیمات */
+.popup-settings {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border: 1px solid var(--input-border);
 }
 
 </style>
