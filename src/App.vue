@@ -164,12 +164,9 @@
     <div class="mb-4">
       <label class="block text-gray-600 font-semibold pb-2" dir="rtl">تغییر حالت نمایش</label>
       <select v-model="theme" @change="applyTheme" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F37F00]">
-        <option value="light">حالت روشن</option>
-        <option value="dark">حالت تاریک</option>
+        <option @click="closeSettings" value="light">حالت روشن</option>
+        <option @click="closeSettings" value="dark">حالت تاریک</option>
       </select>
-    </div>
-    <div class="flex justify-end space-x-4">
-      <button @click="closeSettings" class="bg-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400" dir="rtl">بستن</button>
     </div>
   </div>
 </div>
