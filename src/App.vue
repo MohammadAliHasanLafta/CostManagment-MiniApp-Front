@@ -562,7 +562,7 @@ export default {
 
 .dark-mode {
   --background-color: #2c2c2c;
-  --text-color: #f1f1f1;
+  --text-color: #333333;
   --navbar-background: #3c3c3c;
   --navbar-text: #f1f1f1;
   --icon-color: #FFAB49;
