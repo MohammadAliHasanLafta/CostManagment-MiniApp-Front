@@ -553,7 +553,7 @@ export default {
 
 <style>
 .light-mode {
-  --background-color: #2c2c2c;
+  --background-color: #2c2c2c85;
   --text-color: #333333;
   --navbar-background: #ffffff;
   --navbar-text: #333333;
@@ -561,7 +561,7 @@ export default {
 }
 
 .dark-mode {
-  --background-color: #2c2c2c;
+  --background-color: #2c2c2c85;
   --text-color: #333333;
   --navbar-background: #3c3c3c;
   --navbar-text: #f1f1f1;
