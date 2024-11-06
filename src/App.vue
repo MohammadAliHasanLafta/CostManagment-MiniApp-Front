@@ -71,7 +71,7 @@
       :expenses="expenses"
       :mobile="mobile"/>
 
-      <nav class="fixed bottom-0 right-0 w-full bg-white shadow-lg flex justify-around items-center py-4 text-gray-600 border-t border-gray-200">
+      <nav class="fixed bottom-0 right-0 w-full shadow-lg flex justify-around items-center py-4 text-gray-600 border-t border-gray-200">
         <router-link to="/profile" class="flex flex-col items-center text-center text-sm" active-class="text-[#FF8100]">
           <i class="fa-solid fa-user text-2xl"></i>
         </router-link>
