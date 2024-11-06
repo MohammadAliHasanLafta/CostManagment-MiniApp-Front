@@ -553,7 +553,7 @@ export default {
 
 <style>
 .light-mode {
-  --background-color: #2c2c2c85;
+  --background-color: #2c2c2c;
   --text-color: #333333;
   --navbar-background: #ffffff;
   --navbar-text: #333333;
