@@ -247,6 +247,7 @@ export default {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
       this.theme = savedTheme;
+      this.applyTheme();
     }
   },
   methods: {
@@ -260,7 +261,11 @@ export default {
       const themeClass = this.theme === 'dark' ? 'dark-mode' : 'light-mode';
       document.documentElement.classList.remove('light-mode', 'dark-mode');
       document.documentElement.classList.add(themeClass);
-      localStorage.setItem('theme', this.theme); // Save the theme to local storage
+      localStorage.setItem('theme', this.theme); // ذخیره حالت در لوکال استوریج
+    },
+    toggleTheme() {
+      this.theme = this.theme === 'light' ? 'dark' : 'light';
+      this.applyTheme();
     },
     async sendMessengerPhone(contact) {
       try {
@@ -547,6 +552,25 @@ export default {
 </script>
 
 <style>
+.light-mode {
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --button-background: #FF8100;
+  --button-hover: #FFA242;
+  --navbar-background: #ffffff;
+  --navbar-text: #333333;
+  --icon-color: #FF8100;
+}
+
+.dark-mode {
+  --background-color: #2c2c2c;
+  --text-color: #f1f1f1;
+  --button-background: #333333;
+  --button-hover: #444444;
+  --navbar-background: #3c3c3c;
+  --navbar-text: #f1f1f1;
+  --icon-color: #FFAB49;
+}
 
 @font-face {
   font-family: 'Sahel';
@@ -570,16 +594,13 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  background-image: 
-  url('https://todolistminiapp.netlify.app/background-72f6ad1d%201.svg');
-  background-size:cover;
+  background-image: url('https://todolistminiapp.netlify.app/background-72f6ad1d%201.svg');
+  background-size: cover;
   background-position: center;
-  background-repeat:repeat;
-  background-color: #ffffff;
+  background-repeat: repeat;
   background-blend-mode: multiply;
-  
-
+  background-color: var(--background-color); /* متغیر پس‌زمینه بر اساس حالت انتخاب شده */
+  color: var(--text-color); /* رنگ متن بر اساس حالت انتخاب شده */
 }
 
 @keyframes slideUp {
@@ -612,84 +633,25 @@ export default {
   animation: slideDown 0.5s ease-out forwards;
 }
 
-/* حالت روشن (پیش‌فرض) */
-.light-mode {
-  --background-color: #ffffff;
-  --text-color: #333333;
-  --button-background: #FF8100;
-  --button-hover: #FFA242;
-  --input-background: #ffffff;
-  --input-border: #e5e5e5;
-  --input-text: #333333;
+nav {
+  background-color: var(--navbar-background); /* رنگ پس‌زمینه نوار ناوبری */
+  color: var(--navbar-text); /* رنگ متن نوار ناوبری */
+  border-top: 1px solid var(--text-color); /* رنگ مرزی */
 }
 
-/* حالت تاریک */
-.dark-mode {
-  --background-color: #2c2c2c;
-  --text-color: #f1f1f1;
-  --button-background: #333333;
-  --button-hover: #444444;
-  --input-background: #444444;
-  --input-border: #666666;
-  --input-text: #ffffff;
+nav a {
+  color: var(--navbar-text); /* رنگ لینک‌ها در نوار ناوبری */
 }
 
-/* تنظیمات عمومی */
-body.light-mode,
-body.dark-mode {
-  background-color: var(--background-color);
-  color: var(--text-color);
+nav a.active-class {
+  color: var(--icon-color); /* رنگ آیکون فعال */
 }
 
-/* استایل بخش اصلی برنامه */
-.background-container {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-size: cover;
-  background-position: center;
-  background-repeat: repeat;
-  background-blend-mode: multiply;
+.bg-#FF8100 {
+  background-color: var(--button-background) !important; /* دکمه‌ها در حالت عادی */
 }
 
-/* استایل های کارت ها */
-.background-container .bg-white,
-.background-container .shadow-lg {
-  background-color: var(--input-background);
-  color: var(--text-color);
-  border-color: var(--input-border);
+.bg-#FF8100:hover {
+  background-color: var(--button-hover) !important; /* دکمه‌ها در حالت هاور */
 }
-
-input,
-select {
-  background-color: var(--input-background);
-  border-color: var(--input-border);
-  color: var(--input-text);
-}
-
-/* استایل دکمه‌ها */
-button {
-  background-color: var(--button-background);
-  color: var(--text-color);
-}
-
-button:hover {
-  background-color: var(--button-hover);
-}
-
-.navbar {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  border-top: 1px solid var(--input-border);
-}
-
-/* استایل های مخصوص پاپ‌آپ تنظیمات */
-.popup-settings {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  border: 1px solid var(--input-border);
-}
-
 </style>
