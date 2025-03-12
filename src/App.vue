@@ -261,7 +261,7 @@
             <option value="dark">حالت تاریک</option>
           </select>
 
-          <button @chamge="applyFullscreen" ></button>
+          <button type="button" @click="applyFullscreen" >تمام صفحه</button>
         </div>
       </div>
     </div>
