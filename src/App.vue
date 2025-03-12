@@ -393,9 +393,7 @@ export default {
       }
     },
     applyHomescreen() {
-      if (window.Eitaa.WebApp.checkHomeScreenStatus() == "missed") {
-        window.Eitaa.WebApp.addToHomeScreen();
-      }
+      window.Eitaa.WebApp.addToHomeScreen();
       this.settingshow = false;
     },
     toggleTheme() {
