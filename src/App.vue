@@ -263,7 +263,7 @@
 
           <button
             type="button"
-            class="mb-5 w-full bg-gray-200 text-gray-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300"
+            class="mb-4 w-full bg-gray-200 text-gray-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300"
             @click="applyFullscreen"
           >
             تمام صفحه
