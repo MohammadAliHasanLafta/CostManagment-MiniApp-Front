@@ -276,6 +276,14 @@
           >
             {{ buttonText }}
           </button>
+
+          <button
+            type="button"
+            class="mt-2 w-full bg-gray-200 text-gray-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300"
+            @click="applyHomescreen"
+          >
+            افزودن به صفحه اصلی
+          </button>
         </div>
       </div>
     </div>
@@ -383,6 +391,12 @@ export default {
         window.Eitaa.WebApp.exitFullscreen();
         this.isFullscreen = !this.isFullscreen;
       }
+    },
+    applyHomescreen() {
+      if (window.Eitaa.WebApp.checkHomeScreenStatus() == "missed") {
+        window.Eitaa.WebApp.addToHomeScreen();
+      }
+      this.settingshow = false;
     },
     toggleTheme() {
       this.theme = this.theme === "light" ? "dark" : "light";
