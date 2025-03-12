@@ -261,7 +261,13 @@
             <option value="dark">حالت تاریک</option>
           </select>
 
-          <button type="button" class="w-full bg-gray-200 text-gray-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300" @click="applyFullscreen" >تمام صفحه</button>
+          <button
+            type="button"
+            class="mb-5 w-full bg-gray-200 text-gray-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300"
+            @click="applyFullscreen"
+          >
+            تمام صفحه
+          </button>
         </div>
       </div>
     </div>
@@ -354,8 +360,10 @@ export default {
       this.closeSettings();
     },
     applyFullscreen() {
-      // if(!window.Eitaa.WebApp.isFullscreen)
+      if (!window.Eitaa.WebApp.isFullscreen)
         window.Eitaa.WebApp.requestFullscreen();
+
+      window.Eitaa.WebApp.exitFullscreen();
     },
     toggleTheme() {
       this.theme = this.theme === "light" ? "dark" : "light";
