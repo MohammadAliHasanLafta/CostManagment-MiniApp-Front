@@ -373,6 +373,7 @@ export default {
         this.isFullscreen = !this.isFullscreen;
       } else {
         window.Eitaa.WebApp.exitFullscreen();
+        this.isFullscreen = !this.isFullscreen;
       }
     },
     toggleTheme() {
