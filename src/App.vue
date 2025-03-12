@@ -246,10 +246,18 @@
       v-if="settingshow"
       class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
     >
-      <div class="bg-white p-6 rounded-lg shadow-lg w-4/5 max-w-md">
-        <h2 class="text-2xl font-semibold mb-4" dir="rtl">تنظیمات</h2>
+      <div class="relative bg-white p-6 rounded-lg shadow-lg w-4/5 max-w-md">
+        <!-- دکمه بستن (ضربدر) -->
+        <button
+          @click="settingshow = false"
+          class="absolute top-3 left-3 text-gray-600 hover:text-red-600 text-2xl font-bold"
+        >
+          ✖
+        </button>
+
+        <h2 class="text-2xl font-semibold mb-4 text-right">تنظیمات</h2>
         <div class="mb-4">
-          <label class="block text-gray-600 font-semibold pb-2" dir="rtl"
+          <label class="block text-gray-600 font-semibold pb-2 text-right"
             >تغییر حالت نمایش</label
           >
           <select
