@@ -266,7 +266,7 @@
             class="mt-2 w-full bg-gray-200 text-gray-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300"
             @click="applyFullscreen"
           >
-            تمام صفحه
+            {{ buttonText }}
           </button>
         </div>
       </div>
@@ -280,7 +280,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      fullscreen: false,
+      isFullscreen: window.Eitaa.WebApp.isFullscreen || false,
       hasPhone: false,
       click: false,
       isLoading: false,
@@ -306,6 +306,11 @@ export default {
       theme: "light",
     };
   },
+  computed: {
+    buttonText() {
+      return this.isFullscreen ? "خروج از تمام صفحه" : "تمام صفحه";
+    },
+  },
   async mounted() {
     const et = window.Eitaa.WebApp;
     this.initData = et?.initData || "";
@@ -328,10 +333,9 @@ export default {
 
       window.Eitaa.WebApp.SettingsButton.show();
       window.Eitaa.WebApp.SettingsButton.onClick(() => {
-        if(!this.settingshow){
+        if (!this.settingshow) {
           this.settingshow = true;
-        }
-        else{
+        } else {
           this.settingshow = false;
         }
       });
@@ -364,14 +368,12 @@ export default {
       this.closeSettings();
     },
     applyFullscreen() {
-      if (!window.Eitaa.WebApp.isFullscreen){
+      if (!window.Eitaa.WebApp.isFullscreen) {
         window.Eitaa.WebApp.requestFullscreen();
-      }
-        
-      else{
+        this.isFullscreen = !this.isFullscreen;
+      } else {
         window.Eitaa.WebApp.exitFullscreen();
       }
-      
     },
     toggleTheme() {
       this.theme = this.theme === "light" ? "dark" : "light";
