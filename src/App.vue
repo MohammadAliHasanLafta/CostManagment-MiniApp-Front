@@ -260,6 +260,8 @@
             <option value="light">حالت روشن</option>
             <option value="dark">حالت تاریک</option>
           </select>
+
+          <button @chamge="applyFullscreen" ></button>
         </div>
       </div>
     </div>
@@ -272,6 +274,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      fullscreen: false,
       hasPhone: false,
       click: false,
       isLoading: false,
@@ -349,6 +352,10 @@ export default {
       document.documentElement.classList.add(themeClass);
       localStorage.setItem("theme", this.theme); // ذخیره حالت در لوکال استوریج
       this.closeSettings();
+    },
+    applyFullscreen() {
+      if(!window.Eitaa.WebApp.isFullscreen)
+        window.Eitaa.WebApp.requestFullscreen();
     },
     toggleTheme() {
       this.theme = this.theme === "light" ? "dark" : "light";
