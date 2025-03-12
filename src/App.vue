@@ -261,7 +261,7 @@
             <option value="dark">حالت تاریک</option>
           </select>
 
-          <button type="button" @click="applyFullscreen" >تمام صفحه</button>
+          <button type="button" class="w-full bg-gray-200 text-gray-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300" @click="applyFullscreen" >تمام صفحه</button>
         </div>
       </div>
     </div>
