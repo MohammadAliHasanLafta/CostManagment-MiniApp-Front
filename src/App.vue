@@ -329,9 +329,11 @@ export default {
       window.Eitaa.WebApp.SettingsButton.show();
       window.Eitaa.WebApp.SettingsButton.onClick(() => {
         if(!this.settingshow){
-          this.openSettings();
+          this.settingshow = true;
         }
-        this.closeSettings();
+        else{
+          this.settingshow = false;
+        }
       });
     } else {
       this.showOtp = true;
@@ -362,10 +364,14 @@ export default {
       this.closeSettings();
     },
     applyFullscreen() {
-      if (!window.Eitaa.WebApp.isFullscreen)
+      if (!window.Eitaa.WebApp.isFullscreen){
         window.Eitaa.WebApp.requestFullscreen();
-
-      window.Eitaa.WebApp.exitFullscreen();
+      }
+        
+      else{
+        window.Eitaa.WebApp.exitFullscreen();
+      }
+      
     },
     toggleTheme() {
       this.theme = this.theme === "light" ? "dark" : "light";
