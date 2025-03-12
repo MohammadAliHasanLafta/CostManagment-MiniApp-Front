@@ -354,7 +354,7 @@ export default {
       this.closeSettings();
     },
     applyFullscreen() {
-      if(!window.Eitaa.WebApp.isFullscreen)
+      // if(!window.Eitaa.WebApp.isFullscreen)
         window.Eitaa.WebApp.requestFullscreen();
     },
     toggleTheme() {
