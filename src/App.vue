@@ -246,7 +246,7 @@
       v-if="settingshow"
       class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
     >
-      <div class="bg-white p-6 rounded-lg shadow-lg w-3/5 max-w-md">
+      <div class="bg-white p-6 rounded-lg shadow-lg w-4/5 max-w-md">
         <h2 class="text-2xl font-semibold mb-4" dir="rtl">تنظیمات</h2>
         <div class="mb-4">
           <label class="block text-gray-600 font-semibold pb-2" dir="rtl"
@@ -255,7 +255,7 @@
           <select
             v-model="theme"
             @change="applyTheme"
-            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F37F00]"
+            class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F37F00]"
           >
             <option value="light">حالت روشن</option>
             <option value="dark">حالت تاریک</option>
@@ -263,7 +263,7 @@
 
           <button
             type="button"
-            class="mb-4 w-full bg-gray-200 text-gray-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300"
+            class="mt-2 w-full bg-gray-200 text-gray-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300"
             @click="applyFullscreen"
           >
             تمام صفحه
