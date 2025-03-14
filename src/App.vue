@@ -286,10 +286,10 @@
               class="w-10 h-10 rounded-full border border-gray-300"
             ></button>
           </div>
-          <p class="mt-2 text-center text-gray-600">
+          <!-- <p class="mt-2 text-center text-gray-600">
             رنگ انتخاب‌شده:
             <span :style="{ color: selectedColor }">{{ selectedColor }}</span>
-          </p>
+          </p> -->
         </div>
 
         <!-- دکمه‌های تنظیمات -->
@@ -343,8 +343,14 @@ export default {
       isAnimating: false,
       settingshow: false,
       theme: "light",
-      selectedColor: "#F37F00", 
-      colors: ["#F37F00", "#1E90FF", "#32CD32", "#FF4500", "#800080", "#FFD700"], 
+      selectedColor: "#F37F00",
+      colors: [
+        "#F37F00",
+        "#1E90FF",
+        "#32CD32",
+        "#FF4500",
+        "#FFD700",
+      ],
     };
   },
   computed: {
@@ -423,10 +429,8 @@ export default {
     },
     changeAppColor(color) {
       this.selectedColor = color;
-      if (window.Telegram && window.Telegram.WebApp) {
-        Telegram.WebApp.setHeaderColor(color);
-        Telegram.WebApp.setBottomBarColor(color);
-      }
+      window.Eitaa.WebApp.setHeaderColor(color);
+      window.Eitaa.WebApp.setBottomBarColor(color);
     },
     toggleTheme() {
       this.theme = this.theme === "light" ? "dark" : "light";
