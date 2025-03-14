@@ -298,7 +298,15 @@
           class="mt-2 w-full bg-gray-200 text-gray-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300"
           @click="applyFullscreen"
         >
-          {{ buttonText }}
+          {{ buttonText_fullscreen }}
+        </button>
+
+        <button
+          type="button"
+          class="mt-2 w-full bg-gray-200 text-gray-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300"
+          @click="applyMainbutton"
+        >
+          {{ buttonText_mainbutton }}
         </button>
 
         <button
@@ -320,6 +328,7 @@ export default {
   data() {
     return {
       isFullscreen: window.Eitaa.WebApp.isFullscreen || false,
+      showMainbutton: false,
       hasPhone: false,
       click: false,
       isLoading: false,
@@ -344,18 +353,15 @@ export default {
       settingshow: false,
       theme: "light",
       selectedColor: "#F37F00",
-      colors: [
-        "#F37F00",
-        "#1E90FF",
-        "#32CD32",
-        "#FF4500",
-        "#FFD700",
-      ],
+      colors: ["#FF8100", "#1E90FF", "#32CD32", "#FF4500", "#FFD700"],
     };
   },
   computed: {
-    buttonText() {
+    buttonText_fullscreen() {
       return this.isFullscreen ? "خروج از تمام صفحه" : "تمام صفحه";
+    },
+    buttonText_mainbutton() {
+      return this.showMainbutton ? "مخفی کردن دکمه اصلی" : "نمایش دکمه اصلی";
     },
   },
   async mounted() {
@@ -371,7 +377,11 @@ export default {
         color: "#FF8100",
         text_color: "#FFFFFF",
       });
-      window.Eitaa.WebApp.MainButton.show();
+      if (this.showMainbutton) {
+        window.Eitaa.WebApp.MainButton.show();
+      } else {
+        window.Eitaa.WebApp.MainButton.hide();
+      }
       window.Eitaa.WebApp.MainButton.onClick(() => {
         this.$router.push({
           path: "/",
@@ -422,6 +432,9 @@ export default {
         window.Eitaa.WebApp.exitFullscreen();
         this.isFullscreen = !this.isFullscreen;
       }
+    },
+    applyMainbutton() {
+      this.showMainbutton = !this.showMainbutton;
     },
     applyHomescreen() {
       window.Eitaa.WebApp.addToHomeScreen();
