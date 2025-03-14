@@ -256,10 +256,12 @@
         </button>
 
         <h2 class="text-2xl font-semibold mb-4 text-right">تنظیمات</h2>
+
+        <!-- تغییر حالت نمایش -->
         <div class="mb-4">
-          <label class="block text-gray-600 font-semibold pb-2 text-right"
-            >تغییر حالت نمایش</label
-          >
+          <label class="block text-gray-600 font-semibold pb-2 text-right">
+            تغییر حالت نمایش
+          </label>
           <select
             v-model="theme"
             @change="applyTheme"
@@ -268,23 +270,44 @@
             <option value="light">حالت روشن</option>
             <option value="dark">حالت تاریک</option>
           </select>
-
-          <button
-            type="button"
-            class="mt-2 w-full bg-gray-200 text-gray-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300"
-            @click="applyFullscreen"
-          >
-            {{ buttonText }}
-          </button>
-
-          <button
-            type="button"
-            class="mt-2 w-full bg-gray-200 text-gray-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300"
-            @click="applyHomescreen"
-          >
-            افزودن به صفحه اصلی
-          </button>
         </div>
+
+        <!-- انتخاب رنگ هدر و نوار پایین -->
+        <div class="mb-4">
+          <label class="block text-gray-600 font-semibold pb-2 text-right">
+            انتخاب رنگ نوار بالا و پایین
+          </label>
+          <div class="flex gap-2 flex-wrap justify-center">
+            <button
+              v-for="color in colors"
+              :key="color"
+              @click="changeAppColor(color)"
+              :style="{ backgroundColor: color }"
+              class="w-10 h-10 rounded-full border border-gray-300"
+            ></button>
+          </div>
+          <p class="mt-2 text-center text-gray-600">
+            رنگ انتخاب‌شده:
+            <span :style="{ color: selectedColor }">{{ selectedColor }}</span>
+          </p>
+        </div>
+
+        <!-- دکمه‌های تنظیمات -->
+        <button
+          type="button"
+          class="mt-2 w-full bg-gray-200 text-gray-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300"
+          @click="applyFullscreen"
+        >
+          {{ buttonText }}
+        </button>
+
+        <button
+          type="button"
+          class="mt-2 w-full bg-gray-200 text-gray-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300"
+          @click="applyHomescreen"
+        >
+          افزودن به صفحه اصلی
+        </button>
       </div>
     </div>
   </div>
@@ -320,6 +343,8 @@ export default {
       isAnimating: false,
       settingshow: false,
       theme: "light",
+      selectedColor: "#F37F00", 
+      colors: ["#F37F00", "#1E90FF", "#32CD32", "#FF4500", "#800080", "#FFD700"], 
     };
   },
   computed: {
@@ -395,6 +420,13 @@ export default {
     applyHomescreen() {
       window.Eitaa.WebApp.addToHomeScreen();
       this.settingshow = false;
+    },
+    changeAppColor(color) {
+      this.selectedColor = color;
+      if (window.Telegram && window.Telegram.WebApp) {
+        Telegram.WebApp.setHeaderColor(color);
+        Telegram.WebApp.setBottomBarColor(color);
+      }
     },
     toggleTheme() {
       this.theme = this.theme === "light" ? "dark" : "light";
