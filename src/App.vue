@@ -328,7 +328,7 @@ export default {
   data() {
     return {
       isFullscreen: window.Eitaa.WebApp.isFullscreen || false,
-      showMainbutton: false,
+      showMainbutton: true,
       hasPhone: false,
       click: false,
       isLoading: false,
@@ -377,11 +377,6 @@ export default {
         color: "#FF8100",
         text_color: "#FFFFFF",
       });
-      if (this.showMainbutton) {
-        window.Eitaa.WebApp.MainButton.show();
-      } else {
-        window.Eitaa.WebApp.MainButton.hide();
-      }
       window.Eitaa.WebApp.MainButton.onClick(() => {
         this.$router.push({
           path: "/",
