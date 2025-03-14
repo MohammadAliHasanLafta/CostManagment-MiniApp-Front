@@ -361,7 +361,7 @@ export default {
       return this.isFullscreen ? "خروج از تمام صفحه" : "تمام صفحه";
     },
     buttonText_mainbutton() {
-      return this.showMainbutton ? "مخفی کردن دکمه اصلی" : "نمایش دکمه اصلی";
+      return this.showMainbutton ? "نمایش دکمه اصلی" : "مخفی کردن دکمه اصلی";
     },
   },
   async mounted() {
