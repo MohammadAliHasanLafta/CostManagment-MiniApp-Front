@@ -434,6 +434,11 @@ export default {
       }
     },
     applyMainbutton() {
+      if (this.showMainbutton) {
+        window.Eitaa.WebApp.MainButton.show();
+      } else {
+        window.Eitaa.WebApp.MainButton.hide();
+      }
       this.showMainbutton = !this.showMainbutton;
     },
     applyHomescreen() {
